@@ -26,8 +26,8 @@ parser.add_argument(
 parser.add_argument(
     "--output",
     "-o",
-    default="./follina.rtf",
-    help="output maldoc file (default: ./follina.rtf)",
+    default="./follina.doc",
+    help="output maldoc file (default: ./follina.doc)",
 )
 
 parser.add_argument(

@@ -16,7 +16,7 @@ options:
   --command COMMAND, -c COMMAND
                         command to run on the target (default: calc)
   --output OUTPUT, -o OUTPUT
-                        output maldoc file (default: ./follina.rtf)
+                        output maldoc file (default: ./follina.doc)
   --interface INTERFACE, -i INTERFACE
                         network interface or IP address to host the HTTP server (default: eth0)
   --port PORT, -p PORT  port to serve the HTTP server (default: 8000)
@@ -29,7 +29,7 @@ Pop `calc.exe`:
 ```
 $ python3 follina.py   
 [+] copied staging doc /tmp/9mcvbrwo
-[+] created maldoc ./follina.rtf
+[+] created maldoc ./follina.doc
 [+] serving html payload on :8000
 ```
 
