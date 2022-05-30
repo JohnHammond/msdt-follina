@@ -6,6 +6,8 @@
 
 Create a "Follina" MS-MSDT attack with a malicious Microsoft Word document and stage a payload with an HTTP server.
 
+![Screenshot](https://user-images.githubusercontent.com/6288722/171033876-dbe73e3e-0a3a-436a-91d8-7fa77a5c1ace.png)
+
 # Usage
 
 ```
