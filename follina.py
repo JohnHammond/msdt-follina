@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
+
+# imports
 import argparse
-import zipfile
 import tempfile
 import shutil
 import os
@@ -12,9 +13,24 @@ import base64
 import http.server
 import socketserver
 import string
-import socket
+import socket 
 import threading
 
+
+# banner
+banner = """
+ ███████████          ████  ████   ███                      
+░░███░░░░░░█         ░░███ ░░███  ░░░                       
+ ░███   █ ░   ██████  ░███  ░███  ████  ████████    ██████  
+ ░███████    ███░░███ ░███  ░███ ░░███ ░░███░░███  ░░░░░███ 
+ ░███░░░█   ░███ ░███ ░███  ░███  ░███  ░███ ░███   ███████ 
+ ░███  ░    ░███ ░███ ░███  ░███  ░███  ░███ ░███  ███░░███ 
+ █████      ░░██████  █████ █████ █████ ████ █████░░████████
+░░░░░        ░░░░░░  ░░░░░ ░░░░░ ░░░░░ ░░░░ ░░░░░  ░░░░░░░░ 
+"""
+
+
+# arguments
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
@@ -55,6 +71,7 @@ parser.add_argument(
 )
 
 
+# main function
 def main(args):
 
     # Parse the supplied interface
@@ -161,6 +178,10 @@ def main(args):
         serve_http()
 
 
+# if imported
 if __name__ == "__main__":
-
+    # print banner
+    print(banner)
+    
+    # run main func
     main(parser.parse_args())
