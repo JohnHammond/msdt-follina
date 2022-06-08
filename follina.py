@@ -2,7 +2,19 @@
 
 
 # imports
-import argparse, tempfile, shutil, os, netifaces, ipaddress, random, base64, http.server, socketserver, string, socket, threading
+import argparse
+import tempfile
+import shutil
+import os
+import netifaces
+import ipaddress
+import random
+import base64
+import http.server
+import socketserver
+import string
+import socket 
+import threading
 
 
 # banner
